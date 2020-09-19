@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Date line</string>
+    <string name="login_text">Login</string>
+    <string name="signup_text">Signup</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+    <string name="sign_up">Don\'t have an account? Sign up</string>
+    <string name="already_have_an_account_log_in">Already have an account? Log in.</string>
+    <string name="full_name">Full name</string>
+    <string name="age">Age</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_other">Other</string>
+    <string name="select_gender">Select gender</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="interested_in">Interested In</string>
+    <string name="profile">Profile</string>
+    <string name="doubletake">Doubletake</string>
+    <string name="matched">Matched</string>
+</resources>
