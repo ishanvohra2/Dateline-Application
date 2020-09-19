@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.ishanvohra.dateline.fragments.SwipeFragment
 import com.ishanvohra.dateline.R
 import com.ishanvohra.dateline.fragments.MatcheFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.profile_view_sheet.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +19,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val bottomSheetBehavior = BottomSheetBehavior.from(profile_sheet)
+
         val bottomNavigation: BottomNavigationView = bottom_navigation
+
+        loadFragment(SwipeFragment.newInstance())
 
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
@@ -30,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.profile_item -> {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                     return@setOnNavigationItemSelectedListener true
                 }
             }
