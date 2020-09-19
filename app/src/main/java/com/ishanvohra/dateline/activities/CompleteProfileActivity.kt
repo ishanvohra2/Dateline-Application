@@ -73,8 +73,6 @@ class CompleteProfileActivity : AppCompatActivity() {
 
             if(radio.isChecked)
                 checkedGender = radio.text as String
-
-            Toast.makeText(this@CompleteProfileActivity, checkedGender, Toast.LENGTH_SHORT).show()
         }
 
         //Choosing Profile Image
