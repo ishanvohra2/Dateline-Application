@@ -1,4 +1,4 @@
-package com.ishanvohra.dateline.activities
+package com.ishanvohra.dateline.View.Activity
 
 import android.app.Activity
 import android.content.Context
@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
@@ -25,11 +26,12 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import com.ishanvohra.dateline.fragments.SwipeFragment
+import com.ishanvohra.dateline.View.fragments.SwipeFragment
 import com.ishanvohra.dateline.R
-import com.ishanvohra.dateline.data.User
-import com.ishanvohra.dateline.fragments.MatcheFragment
-import kotlinx.android.synthetic.main.activity_complete_profile.*
+import com.ishanvohra.dateline.Model.User
+import com.ishanvohra.dateline.View.fragments.MatcheFragment
+import com.ishanvohra.dateline.ViewModel.LoginViewModel
+import com.ishanvohra.dateline.ViewModel.ProfileViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.profile_view_sheet.*
 import java.io.IOException
@@ -93,10 +95,14 @@ class MainActivity : AppCompatActivity() {
         val femaleCheckBox: CheckBox = view.findViewById(R.id.preferred_radio_button_female)
         val maleCheckBox: CheckBox = view.findViewById(R.id.preferred_radio_button_male)
         val otherCheckBox: CheckBox = view.findViewById(R.id.preferred_radio_button_other)
+        val logOutBtn: Button = view.findViewById(R.id.logout_btn)
+
         profilePic = view.findViewById(R.id.profile_pic)
         var interestedList = ArrayList<String>()
 
         var checkedGender = "Female"
+
+        val viewModel: ProfileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         val databaseReference = FirebaseDatabase.getInstance().reference
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
@@ -200,6 +206,11 @@ class MainActivity : AppCompatActivity() {
             databaseReference.child("Users").child(userId).child("age").setValue(age)
             databaseReference.child("Users").child(userId).child("gender").setValue(checkedGender)
             databaseReference.child("Users").child(userId).child("preferredGender").setValue(interestedList)
+        }
+
+        logOutBtn.setOnClickListener {
+            viewModel.logoutUser()
+            finish()
         }
 
         profilePic.setOnClickListener {

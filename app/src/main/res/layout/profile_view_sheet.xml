@@ -154,16 +154,36 @@
 
             </LinearLayout>
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_margin="8dp">
+
             <Button
                     android:text="@string/save_profile"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/save_btn"
-                    android:paddingStart="50dp"
-                    android:paddingEnd="50dp"
-                    android:layout_margin="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/white"
+                    android:background="@color/colorPrimaryDark" />
+
+            <Button
+                    android:text="@string/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/logout_btn"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="12dp"
                     android:textColor="@android:color/white"
                     android:background="@color/colorPrimaryDark"/>
+
+        </LinearLayout>
 
         </LinearLayout>
 

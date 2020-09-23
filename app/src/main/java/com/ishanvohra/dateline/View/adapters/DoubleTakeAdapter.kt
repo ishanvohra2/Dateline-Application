@@ -1,7 +1,6 @@
-package com.ishanvohra.dateline.adapters
+package com.ishanvohra.dateline.View.adapters
 
 import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ishanvohra.dateline.R
-import com.ishanvohra.dateline.data.User
+import com.ishanvohra.dateline.Model.User
 
 class DoubleTakeAdapter : RecyclerView.Adapter<DoubleTakeAdapter.MyViewHolder>() {
 

@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragments.SwipeFragment"
+             tools:context=".View.fragments.SwipeFragment"
              android:background="@color/light_pink">
 
     <com.yuyakaido.android.cardstackview.CardStackView

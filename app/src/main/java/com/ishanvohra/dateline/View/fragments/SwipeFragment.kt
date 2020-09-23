@@ -1,4 +1,4 @@
-package com.ishanvohra.dateline.fragments
+package com.ishanvohra.dateline.View.fragments
 
 
 import android.os.Bundle
@@ -7,15 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 import com.ishanvohra.dateline.R
-import com.ishanvohra.dateline.adapters.DoubleTakeAdapter
-import com.ishanvohra.dateline.data.User
+import com.ishanvohra.dateline.View.adapters.DoubleTakeAdapter
+import com.ishanvohra.dateline.Model.User
 import com.yuyakaido.android.cardstackview.*
-import kotlinx.android.synthetic.main.fragment_swipe.*
 
 class SwipeFragment : Fragment(), CardStackListener {
 

@@ -1,4 +1,4 @@
-package com.ishanvohra.dateline.fragments
+package com.ishanvohra.dateline.View.fragments
 
 
 import android.os.Bundle

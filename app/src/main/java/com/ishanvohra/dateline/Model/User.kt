@@ -1,4 +1,4 @@
-package com.ishanvohra.dateline.data
+package com.ishanvohra.dateline.Model
 
 data class User(val uid:String?= "",
                 val name:String?="",

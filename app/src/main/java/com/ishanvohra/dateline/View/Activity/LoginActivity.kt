@@ -1,25 +1,29 @@
-package com.ishanvohra.dateline.activities
+package com.ishanvohra.dateline.View.Activity
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.ishanvohra.dateline.R
+import com.ishanvohra.dateline.ViewModel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(){
     private lateinit var loginButton:Button
     private lateinit var emailEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var signUpTv: TextView
     private lateinit var mAuth: FirebaseAuth
 
+    private val TAG: String = "LoginActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +36,29 @@ class LoginActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
+        val viewModel: LoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
         loginButton.setOnClickListener {
-            login(emailEditText.text.toString(),passwordEditText.text.toString())
+            val email: String = emailEditText.text.toString()
+            val password: String = passwordEditText.text.toString()
+
+            if(email.isEmpty()){
+                emailEditText.error = "Enter email"
+                return@setOnClickListener
+            }
+
+            if(password.isEmpty()){
+                passwordEditText.error = "Enter password"
+                return@setOnClickListener
+            }
+
+            viewModel.loginUser(emailEditText.text.toString(),passwordEditText.text.toString())!!.addOnCompleteListener {task ->
+                if(task.isSuccessful){
+
+                }
+                else
+                    Toast.makeText(this@LoginActivity,"${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
+            }
         }
 
         signUpTv.setOnClickListener {
@@ -50,25 +75,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
-    fun login(email:String, password:String){
-
-        if(!email.isEmpty() && !password.isEmpty()){
-            mAuth.signInWithEmailAndPassword(emailEditText.text.toString(),passwordEditText.text.toString())
-                .addOnCompleteListener {task->
-                    if(task.isSuccessful){
-                        startActivity(MainActivity.newIntent(this@LoginActivity))
-                        finish()
-                    }
-                    else{
-                        Toast.makeText(this@LoginActivity,"${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-        }else{
-            Toast.makeText(this@LoginActivity,"Empty Fields", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     companion object{
         fun newIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }

@@ -1,4 +1,4 @@
-package com.ishanvohra.dateline.activities
+package com.ishanvohra.dateline.View.Activity
 
 import android.app.Activity
 import android.content.Context
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.*
-import androidx.core.view.get
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
@@ -22,7 +21,6 @@ import com.google.firebase.storage.UploadTask
 import com.ishanvohra.dateline.R
 import kotlinx.android.synthetic.main.activity_complete_profile.*
 import java.io.IOException
-import java.util.*
 import kotlin.collections.ArrayList
 
 class CompleteProfileActivity : AppCompatActivity() {
@@ -141,7 +139,11 @@ class CompleteProfileActivity : AppCompatActivity() {
             databaseReference.child("Users").child(auth.currentUser?.uid ?: "").child("preferredGender")
                 .setValue(interestedList)
 
-            startActivity(MainActivity.newIntent(this@CompleteProfileActivity))
+            startActivity(
+                MainActivity.newIntent(
+                    this@CompleteProfileActivity
+                )
+            )
         }
 
     }
