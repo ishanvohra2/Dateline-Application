@@ -4,16 +4,12 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.ishanvohra.dateline.R
-import com.ishanvohra.dateline.ViewModel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(){
@@ -21,7 +17,7 @@ class LoginActivity : AppCompatActivity(){
     private lateinit var emailEditText: TextInputEditText
     private lateinit var passwordEditText: TextInputEditText
     private lateinit var signUpTv: TextView
-    private lateinit var mAuth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     private val TAG: String = "LoginActivity"
 
@@ -34,9 +30,7 @@ class LoginActivity : AppCompatActivity(){
         passwordEditText = password_et
         signUpTv = login_sign_up_tv
 
-        mAuth = FirebaseAuth.getInstance()
-
-        val viewModel: LoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        auth = FirebaseAuth.getInstance()
 
         loginButton.setOnClickListener {
             val email: String = emailEditText.text.toString()
@@ -52,13 +46,13 @@ class LoginActivity : AppCompatActivity(){
                 return@setOnClickListener
             }
 
-            viewModel.loginUser(emailEditText.text.toString(),passwordEditText.text.toString())!!.addOnCompleteListener {task ->
-                if(task.isSuccessful){
-
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                if(it.isSuccessful){
+                    startActivity(MainActivity.newIntent(this@LoginActivity))
+                    finish()
                 }
-                else
-                    Toast.makeText(this@LoginActivity,"${task.exception?.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
+
         }
 
         signUpTv.setOnClickListener {
@@ -68,7 +62,7 @@ class LoginActivity : AppCompatActivity(){
 
     override fun onStart() {
         super.onStart()
-        val user = mAuth.currentUser
+        val user = auth.currentUser
 
         if(user != null){
             startActivity(MainActivity.newIntent(this@LoginActivity))

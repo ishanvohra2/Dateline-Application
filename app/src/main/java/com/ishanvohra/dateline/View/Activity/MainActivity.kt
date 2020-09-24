@@ -30,7 +30,6 @@ import com.ishanvohra.dateline.View.fragments.SwipeFragment
 import com.ishanvohra.dateline.R
 import com.ishanvohra.dateline.Model.User
 import com.ishanvohra.dateline.View.fragments.MatcheFragment
-import com.ishanvohra.dateline.ViewModel.LoginViewModel
 import com.ishanvohra.dateline.ViewModel.ProfileViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.profile_view_sheet.*
